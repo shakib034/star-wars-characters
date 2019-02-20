@@ -20,9 +20,7 @@ app.controller('myCtrl', function($scope, $http, $q) {
         function onSuccess(response) {  
 
             var charFilmUrls = response.data.films; 
-
-            console.log(charFilmUrls);    
-
+            
             var movieList = [];
             promiseArray = [];
 
@@ -30,7 +28,6 @@ app.controller('myCtrl', function($scope, $http, $q) {
 
                 var movie = {title: null, relaseDate: null};
 
-                //console.log(element);
                 var getRequest = {
                     method: "GET",
                     url: element,
@@ -42,10 +39,9 @@ app.controller('myCtrl', function($scope, $http, $q) {
                     movie.relaseDate = response.data.release_date;
                     movieList.push(movie);
 
-                    console.log(movie);
                 }));
             });
-            //console.log(promiseArray);
+            
             $q.all(promiseArray).then(function(response) {
                 $scope.showSpinner = false;
                 console.log(movieList.length);
